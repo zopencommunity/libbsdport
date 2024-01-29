@@ -1,0 +1,24 @@
+diff --git a/src/readpassphrase.c b/src/readpassphrase.c
+index 0082c82..22186e9 100644
+--- a/src/readpassphrase.c
++++ b/src/readpassphrase.c
+@@ -24,14 +24,18 @@
+ #include <ctype.h>
+ #include <errno.h>
+ #include <fcntl.h>
++#ifndef __MVS__
+ #include <paths.h>
++#endif
+ #include <pwd.h>
+ #include <signal.h>
+ #include <string.h>
+ #include <termios.h>
+ #include <unistd.h>
+ #include <readpassphrase.h>
+-
++#ifdef __MVS__
++#define _PATH_TTY       "/dev/tty"
++#endif
+ #ifndef TCSASOFT
+ #define TCSASOFT 0
+ #endif

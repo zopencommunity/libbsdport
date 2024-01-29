@@ -1,0 +1,34 @@
+diff --git a/configure.ac b/configure.ac
+index c3e6fbb..0438286 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -15,7 +15,7 @@ AM_INIT_AUTOMAKE(
+   [no-dist-gzip dist-xz]
+ )
+ AM_SILENT_RULES([yes])
+-
++AC_CANONICAL_HOST
+ LIBBSD_ABI_MAJOR=0
+ LIBBSD_ABI_MINOR=11
+ LIBBSD_ABI_PATCH=8
+@@ -287,6 +287,20 @@ AS_CASE([$host_os],
+     # enable it explicitly
+     need_funopen=yes
+   ],
++  [openedition], [
++    need_arc4random=no
++    need_bsd_getopt=no
++    need_progname=no
++    need_transparent_libmd=no
++    need_md5=yes
++    need_nlist=no
++    need_strl=no
++    need_wcsl=no
++    need_strmode=no
++    need_id_from_name=no
++    need_fpurge=no
++    need_funopen=no
++  ],
+   [darwin*], [
+     # On macOS these are provided by the system, and libbsd has never built
+     # there, so we can avoid providing these with no ABI breakage.

@@ -1,0 +1,11 @@
+diff --git a/src/fgetln.c b/src/fgetln.c
+index 3b62666..f8c9122 100644
+--- a/src/fgetln.c
++++ b/src/fgetln.c
+@@ -80,5 +80,5 @@ libbsd_link_warning(fgetln,
+                     "The fgetln() function cannot be safely ported, use getline(3) "
+                     "instead, as it is supported by GNU and POSIX.1-2008.");
+ #else
+-#error "Function fgetln() needs to be ported."
++#warning "Function fgetln() needs to be ported."
+ #endif
