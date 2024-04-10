@@ -1,12 +1,8 @@
 export ZOPEN_GIT_URL="https://gitlab.freedesktop.org/libbsd/libbsd"
-export ZOPEN_GIT_DEPS="libmd git make m4 autoconf perl libtool automake bash zoslib tar sed coreutils gnulib"
-#export ZOPEN_TARBALL_URL="https://libbsd.freedesktop.org/releases/libbsd-0.11.7.tar.xz"
-#export ZOPEN_TARBALL_DEPS="make libmd"
+export ZOPEN_GIT_DEPS="libmd git make m4 autoconf libtool automake bash zoslib tar sed coreutils gnulib openssl"
 export ZOPEN_TYPE="GIT"
-export ZOPEN_RUNTIME_DEPS="bash"
 export ZOPEN_COMP="clang"
-export ZOPEN_BOOTSTRAPD="./autogen"
-export ZOPEN_EXTRA_CFLAGS="-mzos-target=zosv2r4 -DNSIG=42 -D_ALL_SOURCE=1 -D_OPEN_SYS_FILE_EXT=1 -D_AE_BIMODAL=1 -D_ENHANCED_ASCII_EXT=0xFFFFFFFF -D_OPEN_SYS_SOCK_IPV6 -D_UNIX03_SOURCE -D_UNIX03_THREADS -D_XOPEN_SOURCE_EXTENDED=1 -D_POSIX_C_SOURCE=200112L -D_POSIX_SOURCE -DPOSIX_SIGNALS" 
+export ZOPEN_BOOTSTRAP="./autogen"
 
 zopen_check_results()
 {
@@ -23,7 +19,14 @@ zopen_check_results()
 
 zopen_append_to_env()
 {
-  # echo envars outside of PATH, MANPATH, LIBPATH
+cat <<ZZ
+if [ ! -z "\$ZOPEN_IN_ZOPEN_BUILD" ]; then
+  export ZOPEN_EXTRA_CFLAGS="\${ZOPEN_EXTRA_CFLAGS} -I\$PWD/include"
+  export ZOPEN_EXTRA_CXXFLAGS="\${ZOPEN_EXTRA_CXXFLAGS}	-I\$PWD/include"
+  export ZOPEN_EXTRA_LDFLAGS="\${ZOPEN_EXTRA_LDFLAGS} -L\$PWD/lib"
+  export ZOPEN_EXTRA_LIBS="\${ZOPEN_EXTRA_LIBS}	-lbsd"
+fi
+ZZ
 }
 
 zopen_append_to_setup()
@@ -33,7 +36,5 @@ zopen_append_to_setup()
 
 zopen_get_version()
 {
-  # Modify to echo the version of your tool/library
-  # Rather than hardcoding the version, obtain the version by running the tool/library
-  echo "1.0.0"
+  ./get-version
 }

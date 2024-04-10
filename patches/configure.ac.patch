@@ -1,34 +1,57 @@
 diff --git a/configure.ac b/configure.ac
-index c3e6fbb..0438286 100644
+index 2a15d72..4a906f1 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -15,7 +15,7 @@ AM_INIT_AUTOMAKE(
-   [no-dist-gzip dist-xz]
- )
- AM_SILENT_RULES([yes])
--
-+AC_CANONICAL_HOST
- LIBBSD_ABI_MAJOR=0
- LIBBSD_ABI_MINOR=11
- LIBBSD_ABI_PATCH=8
-@@ -287,6 +287,20 @@ AS_CASE([$host_os],
-     # enable it explicitly
-     need_funopen=yes
+@@ -262,6 +262,52 @@ AS_CASE([$host_os],
+     abi_vis=no
+     abi_wcsl=no
    ],
 +  [openedition], [
-+    need_arc4random=no
-+    need_bsd_getopt=no
-+    need_progname=no
-+    need_transparent_libmd=no
-+    need_md5=yes
-+    need_nlist=no
-+    need_strl=no
-+    need_wcsl=no
-+    need_strmode=no
-+    need_id_from_name=no
-+    need_fpurge=no
-+    need_funopen=no
++    api_time_macros=no
++    abi_accmode=no
++    abi_arc4random=no
++    abi_arc4random_stir=no
++    abi_asprintf=no
++    abi_bsd_getopt=no
++    abi_closefrom=yes
++    abi_err=no
++    abi_errc=no
++    abi_expand_number=yes
++    abi_explicit_bzero=yes
++    abi_fgetln=no
++    abi_flopen=yes
++    abi_fmtcheck=no
++    abi_fpurge=no
++    abi_freezero=yes
++    abi_funopen=no
++    abi_getbsize=yes
++    abi_getpeereid=no
++    abi_humanize_number=yes
++    abi_id_from_name=yes
++    abi_inet_net_pton=no
++    abi_md5=yes
++    abi_name_from_id=no
++    abi_nlist=no
++    abi_pidfile=yes
++    abi_proctitle=yes
++    abi_progname=no
++    abi_readpassphrase=no
++    abi_reallocarray=yes
++    abi_reallocf=no
++    abi_recallocarray=yes
++    abi_stringlist=no
++    abi_sort=no
++    abi_strl=no
++    abi_strmode=no
++    abi_strnstr=no
++    abi_strtonum=no
++    abi_strtox=yes
++    abi_timeconv=no
++    # On libmd.
++    abi_transparent_libmd=no
++    abi_vis=no
++    abi_wcsl=no
 +  ],
-   [darwin*], [
-     # On macOS these are provided by the system, and libbsd has never built
-     # there, so we can avoid providing these with no ABI breakage.
+   [solaris2*], [
+     api_time_macros=yes
+
