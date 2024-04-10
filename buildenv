@@ -1,5 +1,5 @@
 export ZOPEN_GIT_URL="https://gitlab.freedesktop.org/libbsd/libbsd"
-export ZOPEN_GIT_DEPS="libmd git make m4 autoconf libtool automake bash zoslib tar sed coreutils gnulib openssl"
+export ZOPEN_GIT_DEPS="libmd git make m4 autoconf libtool automake bash zoslib tar sed coreutils gnulib openssl xz"
 export ZOPEN_TYPE="GIT"
 export ZOPEN_COMP="clang"
 export ZOPEN_BOOTSTRAP="./autogen"
