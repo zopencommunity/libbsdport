@@ -36,5 +36,5 @@ zopen_append_to_setup()
 
 zopen_get_version()
 {
-  ./get-version
+  ./get-version  
 }
