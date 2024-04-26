@@ -1,0 +1,40 @@
+export ZOPEN_GIT_URL="https://gitlab.freedesktop.org/libbsd/libbsd"
+export ZOPEN_GIT_DEPS="libmd git make m4 autoconf libtool automake bash zoslib tar sed coreutils gnulib openssl xz"
+export ZOPEN_TYPE="GIT"
+export ZOPEN_COMP="clang"
+export ZOPEN_BOOTSTRAP="./autogen"
+
+zopen_check_results()
+{
+  dir="$1"
+  pfx="$2"
+  chk="$1/$2_check.log"
+
+  # Echo the following information to gauge build health
+  echo "actualFailures:0"
+  echo "totalTests:1"
+  echo "expectedFailures:0"
+  echo "expectedTotalTests:1"
+}
+
+zopen_append_to_env()
+{
+cat <<ZZ
+if [ ! -z "\$ZOPEN_IN_ZOPEN_BUILD" ]; then
+  export ZOPEN_EXTRA_CFLAGS="\${ZOPEN_EXTRA_CFLAGS} -I\$PWD/include"
+  export ZOPEN_EXTRA_CXXFLAGS="\${ZOPEN_EXTRA_CXXFLAGS}	-I\$PWD/include"
+  export ZOPEN_EXTRA_LDFLAGS="\${ZOPEN_EXTRA_LDFLAGS} -L\$PWD/lib"
+  export ZOPEN_EXTRA_LIBS="\${ZOPEN_EXTRA_LIBS}	-lbsd"
+fi
+ZZ
+}
+
+zopen_append_to_setup()
+{
+  # echo commands that will run when installing via setup.sh
+}
+
+zopen_get_version()
+{
+  ./get-version  
+}

@@ -1,0 +1,15 @@
+diff --git a/src/flopen.c b/src/flopen.c
+index 679445f..6eda588 100644
+--- a/src/flopen.c
++++ b/src/flopen.c
+@@ -38,6 +38,10 @@
+ 
+ #include <libutil.h>
+ 
++#ifdef __MVS__
++#define AT_FDCWD -100
++#endif
++
+ static int
+ lock_file(int fd, int flags)
+ {
